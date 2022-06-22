@@ -3,20 +3,20 @@
 require_relative "lib/hotwire_datatables/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "hotwire_datatables"
-  spec.version       = HotwireDatatables::VERSION
-  spec.authors       = ["Marcus Ilgner"]
-  spec.email         = ["mail@marcusilgner.com"]
+  spec.name = "hotwire_datatables"
+  spec.version = HotwireDatatables::VERSION
+  spec.authors = ["Marcus Ilgner"]
+  spec.email = ["mail@marcusilgner.com"]
 
-  spec.summary       = "A full-stack datatables library based on Hotwire."
-  spec.description   = <<~DESCRIPTION
+  spec.summary = "A full-stack datatables library based on Hotwire."
+  spec.description = <<~DESCRIPTION
     DRY patterns for when you need more than just one datatable in your app.
     Includes sorting, filtering and patterns for live-updates to your data,
     as well as default styles and formatting for common use-cases.
   DESCRIPTION
 
-  spec.homepage      = "https://github.com/milgner/hotwire_datatables"
-  spec.license       = "MIT"
+  spec.homepage = "https://github.com/milgner/hotwire_datatables"
+  spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0.0"
 
   spec.metadata["homepage_uri"] = spec.homepage
@@ -29,9 +29,14 @@ Gem::Specification.new do |spec|
   spec.files = Dir.chdir(File.expand_path(__dir__)) do
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{\A(?:test|spec|features)/}) }
   end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
+  spec.bindir = "exe"
+  spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
   spec.add_dependency "turbo-rails", ">= 1.1.1"
+
+  spec.add_development_dependency "rails", ">= 7.0"
+  spec.add_development_dependency "rspec-rails", ">= 6.0.0.rc1"
+  spec.add_development_dependency "sprockets-rails"
+  spec.add_development_dependency "sqlite3"
 end
