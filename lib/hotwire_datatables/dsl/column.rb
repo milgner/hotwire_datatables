@@ -29,8 +29,6 @@ module HotwireDatatables
       end
     end
 
-    def columns
-      self.class.columns
-    end
+    delegate :columns, to: :class
   end
 end

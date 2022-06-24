@@ -34,4 +34,10 @@ RSpec.describe HotwireDatatables::Table do
       )
     end
   end
+
+  it "provides access to class-level columns" do
+    fake_columns = []
+    expect(clazz).to receive(:columns).and_return(fake_columns)
+    expect(table.columns).to equal(fake_columns)
+  end
 end
