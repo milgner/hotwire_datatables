@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe "Column DSL" do
-
   class ExampleTable < HotwireDatatables::Table
     column :title
   end
@@ -17,6 +16,22 @@ RSpec.describe "Column DSL" do
 
       names = ExampleTable.columns.map(&:name)
       expect(names).to match_array(%i[title])
+    end
+  end
+
+  describe "title" do
+    subject(:column) { table.columns.first }
+
+    let(:table) do
+      Class.new(HotwireDatatables::Table) do
+        column :foo_bar do
+          title "Baz23"
+        end
+      end
+    end
+
+    it "passes specified string to column" do
+      expect(column.title).to eq("Baz23")
     end
   end
 end

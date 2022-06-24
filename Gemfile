@@ -11,3 +11,6 @@ gem "rspec", "~> 3.1"
 
 gem "rubocop", "~> 1.7"
 gem "yard"
+
+# Optional dependencies, should be there during development, though
+gem "pagy", "~> 5.10"

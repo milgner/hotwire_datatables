@@ -109,6 +109,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.6-x86_64-linux)
       racc (~> 1.4)
+    pagy (5.10.1)
+      activesupport
     parallel (1.22.1)
     parser (3.1.2.0)
       ast (~> 2.4.1)
@@ -210,6 +212,7 @@ PLATFORMS
 
 DEPENDENCIES
   hotwire_datatables!
+  pagy (~> 5.10)
   rails (>= 7.0)
   rake (~> 13.0)
   rspec (~> 3.1)

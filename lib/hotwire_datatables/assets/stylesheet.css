@@ -1,0 +1,11 @@
+.datatable {
+    display: table;
+}
+
+.datatable .dt-row {
+    display: table-row;
+}
+
+.datatable .dt-row .dt-cell {
+    display: table-cell;
+}
