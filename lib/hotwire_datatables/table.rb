@@ -15,13 +15,14 @@ module HotwireDatatables
     include ColumnDsl
     include QueryDsl
 
-    attr_reader :params, :records
+    attr_reader :request, :records
+    delegate :params, to: :request
 
-    # @param params [Hash] request params used for pagination, sorting & filtering
+    # @param request [ActionDispatch::Request] request params used for pagination, sorting & filtering
     # @param records scoped records injected from the controller. Will be processed via the query adapter.
-    def initialize(params, records)
+    def initialize(request, records)
       super()
-      @params = params
+      @request = request
       @records = records
     end
 
@@ -32,11 +33,13 @@ module HotwireDatatables
     end
 
     def pagination_context
-      @pagination_context ||= pagination_adapter.apply_pagination(filtered_records)
+      @pagination_context ||= pagination_adapter.apply_pagination(@request, filtered_records)
     end
 
+    include ActiveModel::Model
+
     def to_partial_path
-      HotwireDatatables::PARTIALS_PATH.join("table")
+      'hotwire_datatables/table'
     end
 
     private

@@ -11,7 +11,7 @@ module HotwireDatatables
       include ::Pagy::Backend
       include ::Pagy::ItemsExtra::Backend
 
-      PaginationContext = Struct.new(:pagy, :records) do
+      PaginationContext = Struct.new(:pagy, :request, :records) do
         include ::Pagy::Frontend
 
         def render
@@ -25,9 +25,9 @@ module HotwireDatatables
         @table = table
       end
 
-      def apply_pagination(records)
+      def apply_pagination(request, records)
         pagy, records = pagy(records)
-        PaginationContext.new(pagy, records)
+        PaginationContext.new(pagy, request, records)
       end
 
       # required by pagy to determine the current page

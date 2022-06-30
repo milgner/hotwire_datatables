@@ -1,0 +1,5 @@
+<div id="<%= dom_id(table) %>" class="datatable">
+  <%= render partial: 'hotwire_datatables/header', locals: { table: table } %>
+  <%= render partial: 'hotwire_datatables/body', locals: { table: table } %>
+  <%= render partial: 'hotwire_datatables/footer', locals: { table: table } %>
+</div>

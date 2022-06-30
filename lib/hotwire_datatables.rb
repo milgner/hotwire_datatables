@@ -18,3 +18,5 @@ module HotwireDatatables
 
   PARTIALS_PATH = Pathname.new(File.dirname(__FILE__)).join("hotwire_datatables", "views")
 end
+
+require_relative 'hotwire_datatables/railtie'

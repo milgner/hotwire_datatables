@@ -1,0 +1,9 @@
+<% table.rows.each do |row| %>
+  <div class="dt-row">
+  <% row.cells.each do |cell| %>
+    <div class="dt-cell">
+      <%= cell.to_html.html_safe %>
+    </div>
+  <% end %>
+  </div>
+<% end %>
