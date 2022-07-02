@@ -19,4 +19,9 @@ RSpec.describe HotwireDatatables::Column do
     subject.title = "Foo"
     expect(subject.title).to eq("Foo")
   end
+
+  it { is_expected.to respond_to(:sortable) }
+  it { is_expected.to respond_to(:sortable?) }
+  it { is_expected.to respond_to(:sort_expression) }
+  it { is_expected.to respond_to(:value) }
 end

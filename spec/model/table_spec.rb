@@ -8,8 +8,13 @@ RSpec.describe HotwireDatatables::Table do
     end
   end
 
+  let(:request) do
+    ActionDispatch::Request.new({ "REQUEST_METHOD" => "GET",
+                                  "rack.input" => -> {} })
+  end
+
   subject(:table) do
-    clazz.new({}, Book.all)
+    clazz.new(request, Book.all)
   end
 
   it { is_expected.to respond_to(:rows) }

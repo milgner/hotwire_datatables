@@ -13,8 +13,7 @@ module HotwireDatatables
     end
 
     def to_html
-      # TOOD: needs a mechanism to format values & customize rendering
-      record.public_send(column.name)
+      column.value(record)
     end
   end
 end

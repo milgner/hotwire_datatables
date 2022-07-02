@@ -1,3 +1,5 @@
+require 'rails/railtie'
+
 module HotwireDatatables
   class Railtie < Rails::Railtie
     initializer "hotwire_datatables.append_view_path" do

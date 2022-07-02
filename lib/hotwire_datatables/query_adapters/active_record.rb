@@ -17,11 +17,19 @@ module HotwireDatatables
 
       # @param base [ActiveRecord::Relation] base query as injected by the controller
       # @return [ActiveRecord::Relation] the query to retrieve the records after applying filters
-      def apply_filters(base)
-        block = table.class.query_block
-        return base if block.nil?
+      def apply_filters(base, params)
+        proc = table.class.query_proc
+        return base if proc.nil?
 
-        block.call(base)
+        proc.call(base, params)
+      end
+
+      # @param base [ActiveRecord::Relation]
+      # @param column [HotwireDatatables::Column]
+      # @param direction [String] asc|desc
+      # @return [ActiveRecord::Relation]
+      def apply_sorting(base, column, direction)
+        base.order(column.sort_expression => direction)
       end
     end
   end

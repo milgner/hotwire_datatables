@@ -1,0 +1,55 @@
+.datatable {
+    display: table;
+}
+
+.datatable .dt-row {
+    display: table-row;
+}
+
+.datatable .dt-row .dt-cell {
+    display: table-cell;
+}
+
+.datatable .dt-header {
+    font-weight: bold;
+    position: relative;
+}
+
+.datatable .dt-header .sortable {
+    cursor: pointer;
+}
+
+.datatable .dt-header .sort::before,
+.datatable .dt-header .sort::after {
+    position: absolute;
+    display: block;
+    right: 10px;
+    line-height: 9px;
+    font-size: 0.6rem;
+    opacity: 0.3;
+    cursor: pointer;
+}
+
+.datatable .dt-header .dt-col-header {
+    display: table-cell;
+    position: relative;
+    padding-right: 30px;
+}
+
+.datatable .dt-header .sort::before {
+    content: "▲";
+    bottom: 50%;
+}
+
+.datatable .dt-header .sort.sort-asc::before {
+    opacity: 0.6;
+}
+
+.datatable .dt-header .sort::after {
+    content: "▼";
+    top: 50%;
+}
+
+.datatable .dt-header .sort.sort-desc::after {
+    opacity: 0.6;
+}

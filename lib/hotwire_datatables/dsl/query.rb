@@ -24,14 +24,14 @@ module HotwireDatatables
     end
 
     class_methods do
-      attr_reader :query_block
+      attr_reader :query_proc
 
-      def query(&block)
-        return if block.nil?
+      def query(lambda)
+        return if lambda.nil?
 
-        raise ArgumentError, ERROR_TWO_BLOCK_ARGUMENTS_REQUIRED unless block.parameters.length == 2
+        raise ArgumentError, ERROR_TWO_BLOCK_ARGUMENTS_REQUIRED unless lambda.parameters.length == 2
 
-        @query_block = block
+        @query_proc = lambda
       end
 
       def query_adapter(type)

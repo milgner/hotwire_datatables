@@ -83,6 +83,9 @@ GEM
       activesupport (>= 5.0)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
+    importmap-rails (1.1.1)
+      actionpack (>= 6.0.0)
+      railties (>= 6.0.0)
     json (2.6.2)
     loofah (2.18.0)
       crass (~> 1.0.2)
@@ -147,6 +150,7 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.0.6)
+    redis (4.6.0)
     regexp_parser (2.5.0)
     rexml (3.2.5)
     rspec (3.11.0)
@@ -214,14 +218,17 @@ PLATFORMS
 
 DEPENDENCIES
   hotwire_datatables!
+  importmap-rails
   pagy (~> 5.10)
   rails (>= 7.0)
   rake (~> 13.0)
+  redis (~> 4.0)
   rspec (~> 3.1)
   rspec-rails (>= 6.0.0.rc1)
   rubocop (~> 1.7)
   sprockets-rails
   sqlite3
+  turbo-rails (~> 1.1)
   yard
 
 BUNDLED WITH
