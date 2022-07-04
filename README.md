@@ -26,48 +26,43 @@ Or install it yourself as:
 ### Declare your table
 
 ```ruby
-class BlogCommentsTable < HotwireDatatables::Table
+class BooksTable < HotwireDatatables::Table
   query_adapter :active_record # it's the default, usually unnecessary, just for completeness
-  pagination_adapter :pagy # alternative: :infinite_scroll, can be extended of course for custom pagination
+  pagination_adapter :pagy # can be extended later for custom pagination
 
   # define the query for the underlying data
   # receives the base collection and params that the controller passes in to the constructor
   query do |base, _params|
     base.joins(:author)
   end
-
-  # simple column from the associated model
-  column :posted_at do
-    orderable default: :desc
-    # some standard formats like `date`, `timestamp` etc might be useful
-    format_with {|posted_at, _comment| I18n.l(posted_at) }
+  
+  # The base query is supplied by the controller
+  # and is enhanced here for suitability to the needs of the table
+  query ->(records, _params) do
+    records.joins(:authors) # for sorting
+           .includes(:authors)
+           .distinct
   end
 
-  # Show data from an associated model
-  column :author do
-    load_from Author.arel_table[:full_name]
+  column :title do
+    sortable
   end
 
-  # Basic filter using just a text input, case-insensitive by default
-  filter :author, :text
-  filter :posted_at, :time_range
+  column :author_names do
+    sortable
+    sort_expression 'authors.name'
+    value { |book| book.authors.pluck(:name).join(', ') }
+  end
 end
 ```
 
 ### Instantiate your table from your controller
 
 ```ruby
-class BlogCommentsController < ApplicationController
-  before_action :load_blog_post
-  
+class BooksController < ApplicationController
   def index
-    @blog_comments_table = BlogCommentsTable.new(@blog_post.comments, params)
-  end
-  
-  private
-  
-  def load_blog_post
-    @blog_post = BlogPost.find(params[:blog_post_id])
+    books = Book.all
+    @books_table = BooksTable.new(request, books)
   end
 end
 ```
@@ -77,16 +72,11 @@ end
 #### `index.html.erb`
 
 ```rhtml
-<h1>Comments</h1>
+<h1>Books</h1>
 
-<%= render @blog_comments_table %>
+<%= render @books_table %>
 ```
 
-#### `index.turbo_stream.erb`
-
-```rhtml
-<%= turbo_stream.replace @blog_comments_table.dom_id, @blog_comments_table %>
-```
 ### Further reading
 
 You can generate documentation using `yard` which will render to the `doc/` directory.
