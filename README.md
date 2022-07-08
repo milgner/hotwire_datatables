@@ -30,17 +30,11 @@ class BooksTable < HotwireDatatables::Table
   query_adapter :active_record # it's the default, usually unnecessary, just for completeness
   pagination_adapter :pagy # can be extended later for custom pagination
 
-  # define the query for the underlying data
-  # receives the base collection and params that the controller passes in to the constructor
-  query do |base, _params|
-    base.joins(:author)
-  end
-  
   # The base query is supplied by the controller
   # and is enhanced here for suitability to the needs of the table
   query ->(records, _params) do
     records.joins(:authors) # for sorting
-           .includes(:authors)
+           .includes(:authors) # for quick access when rendering
            .distinct
   end
 
