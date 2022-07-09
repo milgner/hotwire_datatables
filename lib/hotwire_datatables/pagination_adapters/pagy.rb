@@ -14,7 +14,9 @@ module HotwireDatatables
       PaginationContext = Struct.new(:pagy, :request, :records) do
         include ::Pagy::Frontend
 
-        def render
+        def render_in(_view_context, &block)
+          raise ArgumentError, "Pagy does not support blocks" if block_given?
+
           pagy_nav(pagy).html_safe
         end
       end

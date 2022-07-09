@@ -1,0 +1,5 @@
+<% if @book.unread? %>
+  <%= button_to 'Mark read', mark_read_book_path(@book) %>
+<% else %>
+  <%= button_to 'Unmark read', unmark_read_book_path(@book) %>
+<% end %>

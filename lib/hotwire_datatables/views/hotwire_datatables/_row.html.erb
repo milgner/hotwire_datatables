@@ -1,0 +1,5 @@
+<% @row.cells.each do |cell| %>
+  <div id="<%= cell.dom_id %>" class="dt-cell">
+    <%= render cell %>
+  </div>
+<% end %>

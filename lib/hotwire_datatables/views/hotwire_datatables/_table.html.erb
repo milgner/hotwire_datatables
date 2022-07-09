@@ -1,7 +1,18 @@
-<%= turbo_frame_tag(table) do %>
+<%= turbo_frame_tag(@table) do %>
   <div class="datatable">
-    <%= render partial: 'hotwire_datatables/header', locals: { table: table } %>
-    <%= render partial: 'hotwire_datatables/body', locals: { table: table } %>
-    <%= render partial: 'hotwire_datatables/footer', locals: { table: table } %>
+    <div class="dt-header dt-row">
+      <% @table.columns.each do |column| %>
+        <%# FIXME: extremely ugly + should be re-usable by custom components and partials %>
+        <%= HotwireDatatables::ColumnPresenter.new(@table, column, request) %>
+      <% end %>
+    </div>
+
+    <% @table.rows.each do |row| %>
+      <div id="<%= row.dom_id %>" class="dt-row">
+        <%= render row %>
+      </div>
+    <% end %>
+
+    <%= render @table.pagination_context %>
   </div>
 <% end %>

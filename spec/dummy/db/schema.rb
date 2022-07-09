@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_22_192140) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_08_095531) do
   create_table "authors", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -28,6 +28,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_22_192140) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status"
+    t.check_constraint "status IN ('read', 'unread')", name: "book_status_check"
   end
 
   create_table "books_genres", force: :cascade do |t|

@@ -26,15 +26,15 @@ Or install it yourself as:
 ### Declare your table
 
 ```ruby
+
 class BooksTable < HotwireDatatables::Table
   query_adapter :active_record # it's the default, usually unnecessary, just for completeness
   pagination_adapter :pagy # can be extended later for custom pagination
-
   # The base query is supplied by the controller
   # and is enhanced here for suitability to the needs of the table
   query ->(records, _params) do
     records.joins(:authors) # for sorting
-           .includes(:authors) # for quick access when rendering
+           .includes(:authors) # for quick access when rendering author names
            .distinct
   end
 
@@ -45,18 +45,40 @@ class BooksTable < HotwireDatatables::Table
   column :author_names do
     sortable
     sort_expression 'authors.name'
-    value { |book| book.authors.pluck(:name).join(', ') }
+    format_with { |book| book.authors.pluck(:name).join(', ') }
+  end
+
+  column :actions do
+    # This is a column not based on any attribute.
+    # 
+    # If the model supports `ActiveModel::Naming`, the renderer can assign a variable
+    # with a proper name. In this instance, the variable will be called `@book`.
+    # Otherwise it will just be called `@row`
+    # 
+    # You can either specify `partial`, `view_component` or `lambda` to
+    # render virtual cells.
+    virtual partial: 'books/row_actions'
   end
 end
 ```
 
-### Instantiate your table from your controller
+### Instantiate & use your table from your controller
 
 ```ruby
 class BooksController < ApplicationController
+  include HotwireDatatables::Controller
+
   def index
     books = Book.all
     @books_table = BooksTable.new(request, books)
+  end
+
+  # A custom action that marks the book as read and updates the table via Turbo
+  def mark_read
+    book = Book.find(params[:id])
+    book.update_attribute(:status, 'read')
+
+    render turbo_stream: table_turbo_stream(BooksTable).update(book)
   end
 end
 ```

@@ -1,13 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "./column"
-require_relative "./cell"
-require_relative "./row"
-
 require_relative './presenters/column_presenter'
 
 require_relative "./dsl/column"
 require_relative "./dsl/query"
+require_relative "./dsl/rendering"
 
 require 'active_model'
 
@@ -20,6 +17,7 @@ module HotwireDatatables
 
     include ColumnDsl
     include QueryDsl
+    include RenderingDsl
 
     attr_reader :request, :records
     delegate :params, to: :request
@@ -30,6 +28,10 @@ module HotwireDatatables
       super()
       @request = request
       @records = records
+    end
+
+    def render_in(view_context, &block)
+      self.class.renderer.render(view_context, 'table', self, &block)
     end
 
     def rows
@@ -43,15 +45,12 @@ module HotwireDatatables
       @pagination_context ||= pagination_adapter.apply_pagination(request, sorted_records)
     end
 
-    def to_partial_path
-      'hotwire_datatables/table'
-    end
-
     # The columns by which to actually sort data in order of importance:
     # the most important column comes first which means the UI will have
     # to prepend search columns
     #
-    # @return [Array<[Column, Symbol]>]
+    # @return [Array<[ColumnDefinition, Symbol]>]
+
     def sort_columns
       @sort_columns ||= begin
                           sortable_columns = columns&.select(&:sortable)

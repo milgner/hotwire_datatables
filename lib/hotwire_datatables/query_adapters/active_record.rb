@@ -25,7 +25,7 @@ module HotwireDatatables
       end
 
       # @param base [ActiveRecord::Relation]
-      # @param column [HotwireDatatables::Column]
+      # @param column [HotwireDatatables::ColumnDefinition]
       # @param direction [String] asc|desc
       # @return [ActiveRecord::Relation]
       def apply_sorting(base, column, direction)
