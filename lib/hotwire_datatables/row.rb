@@ -14,7 +14,6 @@ module HotwireDatatables
       helpers.dom_id(record, 'table-row')
     end
 
-    # TOOD: rendering architecture still quite suboptimal
     def render_in(view_context, &block)
       renderer.render(view_context, :row, self, &block)
     end
@@ -27,7 +26,8 @@ module HotwireDatatables
 
     private
 
-    # TODO: refine concept, maybe declare row renderer on table?
+    # As the view path is appended at the end, users can just customize the rendering
+    # by creating their own partial of the name
     def renderer
       @renderer ||= Rendering::PartialRenderer.new('hotwire_datatables/row')
     end

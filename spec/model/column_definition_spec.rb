@@ -22,6 +22,6 @@ RSpec.describe HotwireDatatables::ColumnDefinition do
 
   it { is_expected.to respond_to(:sortable) }
   it { is_expected.to respond_to(:sortable?) }
-  it { is_expected.to respond_to(:sort_expression) }
+  it { is_expected.to respond_to(:source_expression) }
   it { is_expected.to respond_to(:format_value) }
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative './presenters/column_presenter'
+require_relative './presenters/column_header'
 
 require_relative "./dsl/column"
 require_relative "./dsl/query"

@@ -44,7 +44,7 @@ class BooksTable < HotwireDatatables::Table
 
   column :author_names do
     sortable
-    sort_expression 'authors.name'
+    source_expression 'authors.name'
     format_with { |book| book.authors.pluck(:name).join(', ') }
   end
 

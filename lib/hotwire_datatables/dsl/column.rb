@@ -26,8 +26,8 @@ module HotwireDatatables
         column_definition.sortable = is_sortable
       end
 
-      def sort_expression(expression)
-        column_definition.sort_expression = expression.presence
+      def source_expression(expression)
+        column_definition.source_expression = expression.presence
       end
 
       def virtual(**render_args)

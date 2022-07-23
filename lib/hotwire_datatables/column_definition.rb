@@ -2,10 +2,9 @@
 
 module HotwireDatatables
   # Models the column definition
-  # TODO: separate column definition and instance
   class ColumnDefinition
     attr_reader :name
-    attr_writer :title, :sort_expression, :format_with
+    attr_writer :title, :source_expression, :format_with
     attr_accessor :sortable, :virtual, :cell_renderer
 
     def initialize(name)
@@ -18,8 +17,9 @@ module HotwireDatatables
       @title || name.to_s.titleize
     end
 
-    def sort_expression
-      @sort_expression || name
+    # Used for sorting & filtering, will be interpreted by the query adapter & filtering
+    def source_expression
+      @source_expression || name
     end
 
     def sortable?

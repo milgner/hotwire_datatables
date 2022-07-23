@@ -2,15 +2,13 @@
   <div class="datatable">
     <div class="dt-header dt-row">
       <% @table.columns.each do |column| %>
-        <%# FIXME: extremely ugly + should be re-usable by custom components and partials %>
-        <%= HotwireDatatables::ColumnPresenter.new(@table, column, request) %>
+        <%= HotwireDatatables::ColumnHeader.new(@table, column, request) %>
       <% end %>
     </div>
 
     <% @table.rows.each do |row| %>
-      <div id="<%= row.dom_id %>" class="dt-row">
-        <%= render row %>
-      </div>
+      <%# Rows can be rendered on their own, enabling them to by updated dynamically %>
+      <%= render row %>
     <% end %>
 
     <%= render @table.pagination_context %>

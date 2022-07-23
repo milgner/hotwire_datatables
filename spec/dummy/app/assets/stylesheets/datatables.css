@@ -1,13 +1,21 @@
 .datatable {
     display: table;
+    border-collapse: collapse;
 }
 
 .datatable .dt-row {
     display: table-row;
 }
 
-.datatable .dt-row .dt-cell {
+.datatable .dt-header .dt-col-header,
+.datatable .dt-cell {
     display: table-cell;
+    border: black 1px solid;
+    padding: 2px;
+}
+
+.datatable .dt-row:nth-child(odd) {
+    background-color: #f3f3f3;
 }
 
 .datatable .dt-header {
@@ -32,8 +40,15 @@
 
 .datatable .dt-header .dt-col-header {
     display: table-cell;
+    padding: 2px;
     position: relative;
-    padding-right: 30px;
+    border: black 1px solid;
+}
+
+.datatable .dt-header .dt-col-header a {
+    text-decoration: none;
+    color: black;
+    display: block;
 }
 
 .datatable .dt-header .sort::before {

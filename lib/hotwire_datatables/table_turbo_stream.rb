@@ -11,7 +11,7 @@ module HotwireDatatables
 
     def update(record)
       row = Row.new(table, record)
-      @tag_builder.update(row.dom_id, row.render_in(view_context))
+      @tag_builder.replace(row.dom_id, row.render_in(view_context))
     end
   end
 end
