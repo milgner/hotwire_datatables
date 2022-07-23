@@ -9,6 +9,10 @@ class BooksTable < HotwireDatatables::Table
            .distinct
   end
 
+  # filter :ilike do
+  #   columns :title, :author_names
+  # end
+
   column :title do
     sortable
   end

@@ -8,6 +8,7 @@ require_relative "hotwire_datatables/version"
 
 module HotwireDatatables
   PARTIALS_PATH = Pathname.new(File.dirname(__FILE__)).join("hotwire_datatables", "views")
+  JAVASCRIPT_PATH = Pathname.new(File.dirname(__FILE__)).join("hotwire_datatables", "javascript")
 
   extend ActiveSupport::Autoload
 

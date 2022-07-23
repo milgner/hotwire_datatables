@@ -113,6 +113,7 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.6-x86_64-linux)
       racc (~> 1.4)
+    oj (3.13.17)
     pagy (5.10.1)
       activesupport
     parallel (1.22.1)
@@ -195,6 +196,8 @@ GEM
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
     sqlite3 (1.4.4)
+    stimulus-rails (1.1.0)
+      railties (>= 6.0.0)
     strscan (3.0.3)
     thor (1.2.1)
     timeout (0.3.0)
@@ -219,6 +222,7 @@ PLATFORMS
 DEPENDENCIES
   hotwire_datatables!
   importmap-rails
+  oj
   pagy (~> 5.10)
   rails (>= 7.0)
   rake (~> 13.0)
@@ -228,6 +232,7 @@ DEPENDENCIES
   rubocop (~> 1.7)
   sprockets-rails
   sqlite3
+  stimulus-rails
   turbo-rails (~> 1.1)
   yard
 

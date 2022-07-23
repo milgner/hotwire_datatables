@@ -3,6 +3,7 @@
 require "pagy"
 require "pagy/backend"
 require "pagy/extras/items"
+require "pagy/extras/navs"
 
 module HotwireDatatables
   module PaginationAdapters
@@ -17,7 +18,10 @@ module HotwireDatatables
         def render_in(_view_context, &block)
           raise ArgumentError, "Pagy does not support blocks" if block_given?
 
-          pagy_nav(pagy).html_safe
+          '<div data-controller="pagy-initializer">' +
+            pagy_nav_js(pagy) +
+            pagy_items_selector_js(pagy) +
+            '</div>'
         end
       end
 

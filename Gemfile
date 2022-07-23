@@ -5,6 +5,7 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in hotwire_datatables.gemspec
 gemspec
 
+gem 'oj'
 gem "rake", "~> 13.0"
 
 gem "rspec", "~> 3.1"
@@ -17,4 +18,5 @@ gem "yard"
 gem "pagy", "~> 5.10"
 gem 'turbo-rails', "~> 1.1"
 gem 'importmap-rails'
+gem 'stimulus-rails'
 gem "redis", "~> 4.0"
